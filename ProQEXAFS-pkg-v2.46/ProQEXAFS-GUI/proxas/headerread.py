@@ -39,9 +39,9 @@ class headerread:
 				line = qex_file.readline().strip('\r\n').replace('# ', '')
 			
 		#search headerlines for keywords
-		self.headerSize = np.int([x for x in header_lines if 'FileHeaderSize_byte' in x][0].split(': ')[1])
-		self.nColumns = np.int([x for x in header_lines if 'AdcNumberColumnsInDataFile' in x][0].split(': ')[1])
-		self.nChannels = np.int([x for x in header_lines if 'AdcNumberChannelsStored' in x][0].split(': ')[1])
+		self.headerSize = int([x for x in header_lines if 'FileHeaderSize_byte' in x][0].split(': ')[1])
+		self.nColumns = int([x for x in header_lines if 'AdcNumberColumnsInDataFile' in x][0].split(': ')[1])
+		self.nChannels = int([x for x in header_lines if 'AdcNumberChannelsStored' in x][0].split(': ')[1])
 		DataLineFormat = ([x for x in header_lines if 'DataLineFormat' in x][0].split(': ')[1]).split(', ')
 		DataLineLabels = ([x for x in header_lines if 'DataLineLabels' in x][0].split(': ')[1]).split(', ')
 	

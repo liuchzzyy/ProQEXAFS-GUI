@@ -56,7 +56,7 @@ for j in range(int(max_n)):
 
 	if j == 0:
 		for i in range(period+1):
-			columns = headers[np.int(i+(phase_delay))::(period)]
+			columns = headers[int(i+(phase_delay))::(period)]
 			columns=list(columns[(columns >= ((period)*start_period)+phase_delay)&(columns < ((period)*(end_period+1))+phase_delay)])
 			columns = [str(i) for i in columns]
 			data_to_average = import_data[columns]

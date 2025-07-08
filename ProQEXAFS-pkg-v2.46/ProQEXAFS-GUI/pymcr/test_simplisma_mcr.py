@@ -20,7 +20,7 @@ D = np.asarray((pd.read_csv('Total_MCR_CuSSZ13.dat', sep='\t', header=None)).val
 if manual == False:
 	#Run SVD
 	eigens, explained_variance_ratio = svd.svd(D, nSVD)
-	nPure = np.int(input('Number of Principle Components :'))
+	nPure = int(input('Number of Principle Components :'))
 	#Run Simplisma
 	S, C_u, C_c = simplisma.pure(D.T, nPure, noise, True)
 else:

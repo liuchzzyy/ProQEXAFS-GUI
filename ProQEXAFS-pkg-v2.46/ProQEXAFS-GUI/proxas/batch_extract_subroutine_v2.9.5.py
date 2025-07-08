@@ -373,12 +373,12 @@ def header_read_qex(filename):
 		print('error')
 		
 	#search headerlines for keywords
-	headerSize = np.int([x for x in header_lines if 'FileHeaderSize_byte' in x][0].split(': ')[1])
-	nColumns = np.int([x for x in header_lines if 'AdcNumberColumnsInDataFile' in x][0].split(': ')[1])
-	nChannels = np.int([x for x in header_lines if 'AdcNumberChannelsStored' in x][0].split(': ')[1])
+	headerSize = int([x for x in header_lines if 'FileHeaderSize_byte' in x][0].split(': ')[1])
+	nColumns = int([x for x in header_lines if 'AdcNumberColumnsInDataFile' in x][0].split(': ')[1])
+	nChannels = int([x for x in header_lines if 'AdcNumberChannelsStored' in x][0].split(': ')[1])
 	DataLineFormat = ([x for x in header_lines if 'DataLineFormat' in x][0].split(': ')[1]).split(', ')
 	DataLineLabels = ([x for x in header_lines if 'DataLineLabels' in x][0].split(': ')[1]).split(', ')
-	AdcClock = np.int([x for x in header_lines if 'AdcClock_Hz' in x][0].split(': ')[1])
+	AdcClock = int([x for x in header_lines if 'AdcClock_Hz' in x][0].split(': ')[1])
 
 	#Interpret DataTypes to extract number of bytes per line
 	line_bytes = int(sum([int(format_item[1]) for format_item in [re.split(r'(\d+)', s) for s in DataLineFormat]])/8)

@@ -50,13 +50,13 @@ def simplisma(D, nr, error):
 		dm[0,0]=c[jvar,jvar]
 		
 		for k in range(irank):
-			kvar=np.int(imp[k])
+			kvar=int(imp[k])
 			
 			dm[0,k+1]=c[jvar,kvar]
 			dm[k+1,0]=c[kvar,jvar]
 			
 			for kk in range(irank):
-				kkvar=np.int(imp[kk])
+				kkvar=int(imp[kk])
 				dm[k+1,kk+1]=c[kvar,kkvar]
 		
 		return dm
@@ -79,8 +79,8 @@ def simplisma(D, nr, error):
 	w[0,:]=(s[0,:]**2)+(mean**2)
 	p[0,:]=s[0,:]/(mean+error)
 
-	imp[0] = np.int(np.argmax(p[0,:]))
-	mp[0] = p[0,:][np.int(imp[0])]
+	imp[0] = int(np.argmax(p[0,:]))
+	mp[0] = p[0,:][int(imp[0])]
 	
 	l=np.sqrt((s[0,:]**2)+((mean+error)**2))
 
@@ -93,7 +93,7 @@ def simplisma(D, nr, error):
 	p[0,:]=w[0,:]*p[0,:]
 	s[0,:]=w[0,:]*s[0,:]
 	
-	print('purest variable 1: ', np.int(imp[0]+1), mp[0])
+	print('purest variable 1: ', int(imp[0]+1), mp[0])
 
 	for i in range(nr-1):
 		for j in range(ncol):
@@ -102,15 +102,15 @@ def simplisma(D, nr, error):
 			p[i+1,j]=w[i+1,j]*p[0,j]
 			s[i+1,j]=w[i+1,j]*s[0,j]
 			
-		imp[i+1] = np.int(np.argmax(p[i+1,:]))
-		mp[i+1] = p[i+1,np.int(imp[i+1])]
+		imp[i+1] = int(np.argmax(p[i+1,:]))
+		mp[i+1] = p[i+1,int(imp[i+1])]
 		
-		print('purest variable '+str(i+2)+': ', np.int(imp[i+1]+1), mp[i+1])
+		print('purest variable '+str(i+2)+': ', int(imp[i+1]+1), mp[i+1])
 		
 	S=np.zeros((nrow, nr))
 			
 	for i in range(nr):
-		S[0:nrow,i]=D[0:nrow,np.int(imp[i])]
+		S[0:nrow,i]=D[0:nrow,int(imp[i])]
 		
 	plt.subplot(3, 1, 2)
 	plt.plot(S)

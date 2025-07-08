@@ -89,7 +89,7 @@ def targetFunc(work, etd, ID, options, lock):
 		headerSize, line_bytes, dt, nData, nLines = header_read_qex(encoder_bin+'.qex')
 		f = open(encoder_bin+'.qex', 'rb')
 		#encoder = np.zeros(nLines)
-		encoder_2 = np.zeros(np.int(np.floor(nLines/resample_factor))+100)
+		encoder_2 = np.zeros(int(np.floor(nLines/resample_factor))+100)
 		#time_data = np.zeros(nLines)
 		f.seek(0)
 	
@@ -111,18 +111,18 @@ def targetFunc(work, etd, ID, options, lock):
 			
 			for k in range(int(np.ceil(nLines/(resample_factor*80000)))):
 				if ((k+1)*(resample_factor*80000)) > nLines:
-					first = np.int(1+last)
+					first = int(1+last)
 					data_E = np.fromfile(f, dtype=dt, count = -1)
 					#encoder[k*8000000:nLines+1] = data_E['encoder']
-					encoder_2[first:first+np.int(len(data_E['encoder'][0::resample_factor]))] = data_E['encoder'][0::resample_factor]
+					encoder_2[first:first+int(len(data_E['encoder'][0::resample_factor]))] = data_E['encoder'][0::resample_factor]
 					last = last + len(data_E['encoder'][0::resample_factor])
 					#time_data[k*8000000:nLines+1] = data_E['time']
 				else:
 					if last != 0:
-						first = np.int(last+1)
+						first = int(last+1)
 					data_E = np.fromfile(f, dtype=dt, count = int(resample_factor*80000))
 					#encoder[k*8000000:(k+1)*8000000] = data_E['encoder']
-					encoder_2[first:first+np.int(len(data_E['encoder'][0::resample_factor]))] = data_E['encoder'][0::resample_factor]
+					encoder_2[first:first+int(len(data_E['encoder'][0::resample_factor]))] = data_E['encoder'][0::resample_factor]
 					#time_data[k*8000000:(k+1)*8000000] = data_E['time']
 					last = last + len(data_E['encoder'][0::resample_factor])
 					
@@ -245,9 +245,9 @@ def header_read_qex(filename):
 			line = qex_file.readline().strip('\r\n').replace('# ', '')
 		
 	#search headerlines for keywords
-	headerSize = np.int([x for x in header_lines if 'FileHeaderSize_byte' in x][0].split(': ')[1])
-	nColumns = np.int([x for x in header_lines if 'AdcNumberColumnsInDataFile' in x][0].split(': ')[1])
-	nChannels = np.int([x for x in header_lines if 'AdcNumberChannelsStored' in x][0].split(': ')[1])
+	headerSize = int([x for x in header_lines if 'FileHeaderSize_byte' in x][0].split(': ')[1])
+	nColumns = int([x for x in header_lines if 'AdcNumberColumnsInDataFile' in x][0].split(': ')[1])
+	nChannels = int([x for x in header_lines if 'AdcNumberChannelsStored' in x][0].split(': ')[1])
 	DataLineFormat = ([x for x in header_lines if 'DataLineFormat' in x][0].split(': ')[1]).split(', ')
 	DataLineLabels = ([x for x in header_lines if 'DataLineLabels' in x][0].split(': ')[1]).split(', ')
 	
